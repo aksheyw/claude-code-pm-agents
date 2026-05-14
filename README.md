@@ -51,6 +51,53 @@ After install, in any Claude Code session:
 
 …or let Claude Code auto-route based on the task description. The `description:` field in each agent's frontmatter tells Claude when to use it.
 
+## Verify install worked
+
+In a fresh Claude Code session:
+
+- Type `@` — autocomplete should list all 7 agents (`@product-manager`, `@growth-hacker`, `@brand-guardian`, `@aso-specialist`, `@seo-specialist`, `@youtube-optimizer`, `@chief-of-staff`).
+- Or open the `/agents` UI — all 7 should appear under user-level agents.
+- Ask: *"design 3 activation experiments"* → Claude should auto-route to `@growth-hacker` via description matching.
+
+If `@` doesn't show them, see **Troubleshooting** below.
+
+## Example output
+
+Abbreviated `@product-manager` output for a daily-digest feature PRD — first ~15 lines of a longer PRD that ships with problem statement, goals, success metrics, RICE score, GTM brief, and rollout plan.
+
+```
+# PRD: Daily Digest Feature
+
+## Problem
+Active users open the app 4x/day but engage with new content only 20% of those sessions —
+the discovery surface is buried two taps deep. Engagement decays at -3pp/week after week 6.
+
+## Goal
+Lift D7 engagement from 47% → 55% within 6 weeks of launch.
+
+## Success metrics (in priority order)
+1. D7 engaged_user_rate ≥ 55% (primary)
+2. Notification CTR ≥ 18% (secondary — lower bound; below this we kill it)
+3. Unsubscribe rate ≤ 4% (guardrail)
+
+## RICE score
+- Reach: 280k MAU · Impact: 2 (moderate-high) · Confidence: 70% · Effort: 8 weeks
+- Score: 280 × 2 × 0.7 / 8 = 49 — top quartile this quarter
+
+## Non-goals (explicit)
+- Personalization beyond top-3 saved categories (defer to v2)
+- Push frequency tuning per user (defer until baseline data lands)
+```
+
+The agent enforces RICE scoring, explicit non-goals, and a guardrail metric on every PRD — no fabricated numbers, no hand-wave goals.
+
+## Troubleshooting
+
+- **`@<agent>` doesn't autocomplete:** confirm files landed at `~/.claude/agents/<name>.md` (flat, not in a subdir). Restart your Claude Code session — agents load at session start.
+- **Auto-routing doesn't pick the right agent:** the routing depends on the `description:` frontmatter in each agent file. If you find a particular task isn't routing, edit that agent's `description:` to mention the task pattern.
+- **Wrong model is being used:** check the `model:` field in the agent's frontmatter. PM and chief-of-staff default to `opus`; rest are `sonnet`. Override per session by passing `--model` to Claude Code.
+- **Agent ran but skipped its templates:** mention the template explicitly (e.g., *"use the PRD template"*) — some sessions short-circuit the agent's full workflow.
+
 ## Example: a complete product launch workflow
 
 A new feature goes through this chain:
