@@ -86,6 +86,7 @@ These agents are part of my Claude Code config series:
 - [`claude-code-deep-review`](https://github.com/aksheyw/claude-code-deep-review) — 14-lens iterative review skill; great companion to the `product-manager` agent for PRD review and the `growth-hacker` agent for launch readiness
 - [`claude-code-rules`](https://github.com/aksheyw/claude-code-rules) — opinionated global rules these agents operate under (commit format, branch strategy, honesty/earned-confidence)
 - [`claude-code-learned-skills`](https://github.com/aksheyw/claude-code-learned-skills) — 3 Docker / SSH / VPS skills auto-extracted from real debugging sessions
+- [`career-command-center-template`](https://github.com/aksheyw/career-command-center-template) — full plugin template for an AI-native job-search workflow (10 skills, 5 personal-data skeletons, hooks)
 
 ## License
 
