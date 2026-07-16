@@ -23,7 +23,7 @@ Verdict families (the only valid values): APPROVE, APPROVE-WITH-CONDITIONS, REVI
 ## The readiness gate (is it ready for the user to act)
 GATED if ANY hold:
 1. an unresolved refusal or safety flag from any seat — a valid flag being a concrete, stated safety, legal, or ethical concern, or a hard-refusal-spine hit (e.g. Data flags an unsourced number, Customer Voice flags a fabricated claim), NOT mere low confidence or a stylistic objection. A valid unresolved flag gates pending your adjudication; it is not a seat veto (the user still decides);
-2. an unresolved BLOCK from any seat at >=75 confidence (a seat hitting its hard-refusal spine is a flag, not a minority vote to average away);
+2. an unresolved BLOCK from any seat held with high conviction (roughly the top of its range — treat this as a band, not a bright line; a 74-vs-75 split never decides whether a serious concern counts, since the confidence signal is uncalibrated). A seat hitting its hard-refusal spine is a flag, not a minority vote to average away;
 3. two seats both >=75 confident pointing OPPOSITE ways, where opposite = one in {APPROVE, APPROVE-WITH-CONDITIONS} and another in {REVISE, BLOCK};
 4. the Red-Team's load-bearing premise is one the brief presents as settled-but-unproven and no seat resolved it (a premise merely *named* does not gate; it becomes a binding condition);
 5. a blocking seat that was part of the chosen panel returned no parseable verdict (fail-safe: silence from a seat you DID dispatch GATES, never CLEARS). Blocking seats are Red-Team in every panel, plus Data and Customer Voice when the panel includes them; a seat deliberately not selected does not gate.
@@ -38,7 +38,7 @@ A non-responding or non-parseable discipline seat appears as Verdict = ABSTAIN, 
 1. Question reviewed (one line) + which seats fired vs abstained.
 2. Convergence: X/N in the APPROVE family; the verdict spread.
 3. Verdict table: Seat | Verdict | Conf | one-line.
-4. The sharpest dissent, verbatim. Do not paraphrase away the sting. **Redaction rule:** before writing any dissent verbatim into a saved artifact, strip sensitive/PII/proprietary detail a seat may have surfaced — customer names or quotes, secrets, internal figures the user would not want persisted to a file — keeping the analytic sting while dropping the identifying specifics.
+4. The sharpest dissent, verbatim. Do not paraphrase away the sting. **Redaction rule:** before reproducing any dissent verbatim in ANY output — this inline brief as well as a saved artifact — strip sensitive/PII/proprietary detail a seat may have surfaced — customer names or quotes, secrets, internal figures the user would not want persisted or restated — keeping the analytic sting while dropping the identifying specifics.
 5. Refusal / safety flags and whether each is resolved.
 6. Gate: CLEARS or GATED, naming the exact triggering condition.
 7. Binding conditions (must-fixes, de-duped) + the scope envelope: what this decision DOES and does NOT authorize, the boundary inside which the user can act without re-convening, and the triggers that force a fresh review.
