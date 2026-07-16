@@ -1,8 +1,8 @@
 # Claude Code PM Agents — A Product Builder's Toolkit
 
-> **Seven Claude Code subagents that cover the full product-builder lifecycle: PRDs, growth, brand, ASO, SEO, YouTube, and comms triage.**
+> **Seven Claude Code subagents that cover the full product-builder lifecycle: PRDs, growth, brand, ASO, SEO, YouTube, and comms triage — plus a 9-seat product council that pressure-tests high-stakes decisions.**
 
-This is the bundle of agents I use to run product work end-to-end with Claude Code. Each agent is a focused specialist with its own model, tools, and operating principles — invoke them individually or compose them into a workflow.
+This is the bundle of agents I use to run product work end-to-end with Claude Code. Each agent is a focused specialist with its own model, tools, and operating principles — invoke them individually or compose them into a workflow. v2 adds the council: a structured multi-agent deliberation system for the decisions where being wrong is expensive.
 
 ## Why I built this
 
@@ -24,6 +24,35 @@ This is that bundle, refined across multiple product launches.
 | `youtube-optimizer` | sonnet | Titles, thumbnails, retention, channel strategy | Any video / YouTube workflow |
 | `chief-of-staff` | opus | Multi-channel comms triage (email, Slack, LINE, Messenger) + draft replies | Daily inbox / Slack triage |
 
+## New in v2: the 9-seat product council
+
+The seven agents above do the work. The council judges it. It is a structured deliberation system for high-stakes calls — interview case studies, 0-1 bets, positioning, monetization, go/no-go — where a single "review this" prompt tends to nod along.
+
+**What ships:** 9 seat definitions ([`agents/council/`](agents/council/)), a governance charter ([`agents/council/CHARTER.md`](agents/council/CHARTER.md)), and an orchestration runbook skill ([`skills/council-full/SKILL.md`](skills/council-full/SKILL.md)). Eight voting discipline seats plus a non-voting Chair:
+
+| Seat | Brings |
+|------|--------|
+| `council-product` | validated value + viability (Cagan's four risks), outcome over output |
+| `council-ux` | Nielsen heuristics, error/empty states, accessibility |
+| `council-engineering` | riskiest technical assumption first, build-vs-buy, scale |
+| `council-data` | denominators, base rates, significance, guardrail metrics |
+| `council-qa` | operational failure modes (FMEA), pre-mortem, blast radius |
+| `council-redteam` | attacks the premise itself; answers blind |
+| `council-customer` | the real buyer (JTBD); refuses invented quotes and stats; answers blind |
+| `council-gtm` | bottom-up sizing, CAC/LTV, willingness-to-pay, moat |
+| `council-chair` | synthesizes verdicts, surfaces dissent verbatim, applies the readiness gate; does not vote |
+
+**The design bet: structured dissent, not a proven better score.** This is a design hypothesis, not an established result. The rationale: ask one model to "consider all angles" and it tends to average itself into a consensus paragraph, so separate seats with distinct mandates surface the disagreement instead of smoothing it over. The honest counter-evidence: correlated LLM judge panels can merely match — or even underperform — the best single judge, because the models make the same mistakes on the same items (see *Nine Judges, Two Effective Votes*, cited in the charter). So the benefit claimed here is **structured dissent and explicit disagreement-surfacing**, not "a panel scores better than one strong review." The council is built for that:
+
+- **Seats answer independently and blind** — each seat gets the shared neutralized brief as its task input, and the Red-Team and Customer Voice seats never see other verdicts (a skeptic who sees the consensus mirrors it; a customer voice that fills gaps fabricates). One honest caveat: Claude Code subagents still inherit the repo's CLAUDE.md and memory, so seats are not fully isolated from project context — keep that context neutral if you need true blindness.
+- **Each seat has a distinct mandate and a hard refusal spine** — things it will not pass no matter how the brief is framed. The Customer Voice seat refuses invented quotes and satisfaction stats and labels every unverified claim [hypothesis].
+- **The Chair surfaces dissent verbatim, never averages it away.** Verdicts reach the Chair in randomized order to reduce position bias (randomization mitigates systematic order effects; it can't remove framing, salience, or shared-model correlation), and abstaining seats are excluded from the convergence denominator instead of counted as agreement.
+- **A readiness gate, advisory only.** The gate flags unresolved BLOCKs, high-confidence forks, and silence from a blocking seat (silence gates, never clears). Unanimity is treated as a warning sign, not a pass. You always decide; the council never does.
+
+**When to convene it.** Full panel (8 seats + Chair) only for the genuinely high-stakes, multi-path calls. For mid-stakes single deliverables, the charter defines a fast path: Product + Red-Team + the one most-relevant domain seat + Chair. For trivial or one-right-answer questions, skip it entirely — a full council runs roughly 10-15x the tokens of a single pass, and the charter is explicit that a council firing on everything becomes a tax, not an edge.
+
+**Invoke it:** after install, say *"convene the council on [decision]"* or load the `council-full` skill. The skill is the runbook; the charter is the governance.
+
 ## What makes them useful (vs writing the prompt yourself)
 
 - **Each agent has a strict operating model.** Hard rules, templates, and success metrics baked in — so output is consistent across sessions.
@@ -37,9 +66,17 @@ This is that bundle, refined across multiple product launches.
 git clone https://github.com/aksheyw/claude-code-pm-agents.git
 cd claude-code-pm-agents
 
-# Drop all agents into your Claude Code config
+# Drop the 7 lifecycle agents into your Claude Code config
 cp agents/*.md ~/.claude/agents/
+
+# Council (optional): the 9 seats, the charter, and the runbook skill
+cp agents/council/council-*.md ~/.claude/agents/
+mkdir -p ~/.claude/council ~/.claude/skills/council-full
+cp agents/council/CHARTER.md ~/.claude/council/CHARTER.md
+cp skills/council-full/SKILL.md ~/.claude/skills/council-full/SKILL.md
 ```
+
+Note the seat files go into `~/.claude/agents/` flat, same as the lifecycle agents — the `agents/council/` subdirectory is just repo organization. The council seats ship without a `model:` pin (they inherit your session model); the charter's "Model assignment" section suggests a tier split if your setup pins models per agent.
 
 After install, in any Claude Code session:
 
@@ -58,6 +95,7 @@ In a fresh Claude Code session:
 - Type `@` — autocomplete should list all 7 agents (`@product-manager`, `@growth-hacker`, `@brand-guardian`, `@aso-specialist`, `@seo-specialist`, `@youtube-optimizer`, `@chief-of-staff`).
 - Or open the `/agents` UI — all 7 should appear under user-level agents.
 - Ask: *"design 3 activation experiments"* → Claude should auto-route to `@growth-hacker` via description matching.
+- If you installed the council: `/agents` should also list the 9 `council-*` seats, and *"convene the council on whether to build X"* should load the `council-full` skill and fan out seats in parallel.
 
 If `@` doesn't show them, see **Troubleshooting** below.
 
