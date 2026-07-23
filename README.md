@@ -1,107 +1,166 @@
-# Claude Code PM Agents: A Product Builder's Toolkit
+<div align="center">
 
-> **Seven Claude Code subagents that cover the full product-builder lifecycle: PRDs, growth, brand, ASO, SEO, YouTube, and comms triage, plus a 9-seat product council that pressure-tests high-stakes decisions.**
+# 🔍 Claude Code PM Agents: a product builder's toolkit
 
-This is the bundle of agents I use to run product work end-to-end with Claude Code. Each agent is a focused specialist with its own model, tools, and operating principles, so you can invoke them individually or compose them into a workflow. v2 adds the council: a structured multi-agent deliberation system for the decisions where being wrong is expensive.
+### Seven specialists that do the work, and nine that argue about it before I commit.
 
-## Why I built this
+![requires](https://img.shields.io/badge/requires-Claude%20Code-D97757) ![agents](https://img.shields.io/badge/agents-7%20%2B%209%20council-0E9384) ![seats](https://img.shields.io/badge/dissent-surfaced%20verbatim-1B2A4A) ![code](https://img.shields.io/badge/no%20code-markdown%20only-lightgrey) ![license](https://img.shields.io/badge/license-MIT-green)
 
-I ship side-projects regularly and kept catching myself context-switching between four different "modes" (PRD writing, growth experiments, brand decisions, app-store optimization) and losing time on each switch.
+</div>
 
-I broke each mode into its own subagent so I could just say "@product-manager write the PRD" or "@growth-hacker design 3 experiments for activation" and get focused output without re-establishing context.
+---
 
-This is that bundle, refined across multiple product launches.
+Claude Code is Anthropic's AI coding assistant. It runs in your terminal, reads the files in your
+project, and can change them for you. A **subagent** is a separate assistant with one job and its own
+instructions, which you call by name.
 
-## The 7 agents
+Seven of these do product work, one mode each, so I stop context-switching between them. The other 9
+are a council that pressure-tests a decision before I commit to it.
+
+<img src="docs/how-the-council-works.svg" width="100%"
+     alt="Why nine seats instead of one 'review this'. One neutral brief, worded to lead nobody, goes to eight seats that answer in parallel: product, ux, engineering, data, qa and gtm, while the red-team and customer seats answer blind, seeing no one else's reply. A chair, which does not vote, reads them in random order, prints disagreement word for word, and never averages it into a verdict. A silent seat blocks and never clears, everyone agreeing is treated as a warning rather than a pass, and you decide, always. The one time I measured it: six agents, four of them from this bundle, reviewed a release build of my Android app, all six approved with conditions averaging 77 out of 100, and then I found a critical bug all six had missed, which is why the gate only advises. The seven agents that do the work rather than judge it are listed further down the page.">
+
+## Why a panel and not one "review this"
+
+Ask one assistant to consider every angle and it tends to average itself into a reasonable-sounding
+paragraph. Nine seats with different mandates surface the disagreement instead of smoothing it, and
+the chair is required to print that disagreement word for word rather than resolve it for you.
+
+A **seat** is one of those nine, and it's just a markdown file: a mandate, and a list of things it
+won't wave through however the question is put to it. The **charter** is the governance document that
+ships alongside them, in `agents/council/CHARTER.md`, and it's what sets the rules below.
+
+**The honest counter-argument, which the charter cites in full:** a panel whose members make the same
+mistakes on the same questions isn't nine opinions, it's closer to two, and a single strong reviewer
+can match it. Nothing here is enforced by code either. These are instructions to a model, not
+permissions a runtime checks, and the seats share a model, so "independent" is a design intent rather
+than a guarantee.
+
+So what this buys is structured dissent, not a better score, and the one time I measured it is on the
+picture above: six agents reviewed a release build of my Android app, four of them from this bundle
+and two others I keep globally. All six approved with conditions. Then I found a critical bug all six
+had missed. That's an n of one and it went against the design, which is exactly why the gate only
+advises and you decide.
+
+A full council also runs roughly 10 to 15 times the tokens of a single pass, so it's for the calls
+where being wrong is expensive. For everything else the charter defines a faster three-seat path, and
+for a question with one right answer you skip it entirely.
+
+<details>
+<summary><b>📋 The seven agents that do the work</b></summary>
+
+Each is one markdown file with its own tool allowlist and its own model tier, so a heavier reasoning
+job gets a heavier model and the app-store agent can't accidentally run a shell command.
 
 | Agent | Model | Job | Use when |
 |-------|-------|-----|----------|
-| `product-manager` | opus | PRDs, RICE scoring, roadmaps, GTM briefs | Defining or prioritizing any product work |
-| `growth-hacker` | sonnet | Experiment design, funnel optimization, launch playbooks | Pre-launch, post-launch, or growth-stuck |
-| `brand-guardian` | sonnet | Brand foundation, visual identity, platform consistency | Setting up a new product or auditing brand drift |
-| `aso-specialist` | sonnet | Play Store + Chrome Web Store optimization | Before any app store submission |
-| `seo-specialist` | sonnet | Technical SEO, topic clusters, AI-search (AEO) | Any content site or product web app |
-| `youtube-optimizer` | sonnet | Titles, thumbnails, retention, channel strategy | Any video / YouTube workflow |
-| `chief-of-staff` | opus | Multi-channel comms triage (email, Slack, LINE, Messenger) + draft replies | Daily inbox / Slack triage |
+| `product-manager` | opus | Product specs (PRDs), RICE prioritisation (reach, impact, confidence, effort), roadmaps, go-to-market (GTM) briefs | Defining or prioritising any product work |
+| `growth-hacker` | sonnet | Experiment design, funnel optimisation, launch playbooks | Pre-launch, post-launch, or growth-stuck |
+| `brand-guardian` | sonnet | Brand foundation, visual identity, platform consistency | Setting up a new product, or auditing brand drift |
+| `aso-specialist` | sonnet | App store optimisation (ASO): getting found in the Play Store and Chrome Web Store | Before any app store submission |
+| `seo-specialist` | sonnet | Technical search optimisation (SEO), topic clusters, and being quotable by AI search engines (AEO) | Any content site or product web app |
+| `youtube-optimizer` | sonnet | YouTube titles, thumbnails, retention, channel strategy | Any video workflow |
+| `chief-of-staff` | opus | Triage across email, Slack, LINE and Messenger, plus draft replies | Daily inbox triage |
 
-## New in v2: the 9-seat product council
+</details>
 
-The seven agents above do the work. The council judges it. It is a structured deliberation system for high-stakes calls (interview case studies, 0-1 bets, positioning, monetization, go/no-go) where a single "review this" prompt tends to nod along.
+<details>
+<summary><b>🔍 The nine council seats, and the rules they run under</b></summary>
 
-**What ships:** 9 seat definitions ([`agents/council/`](agents/council/)), a governance charter ([`agents/council/CHARTER.md`](agents/council/CHARTER.md)), and an orchestration runbook skill ([`skills/council-full/SKILL.md`](skills/council-full/SKILL.md)). Eight voting discipline seats plus a non-voting Chair:
+Eight voting discipline seats plus a chair who doesn't vote.
 
 | Seat | Brings |
 |------|--------|
-| `council-product` | validated value + viability (Cagan's four risks), outcome over output |
-| `council-ux` | Nielsen heuristics, error/empty states, accessibility |
-| `council-engineering` | riskiest technical assumption first, build-vs-buy, scale |
-| `council-data` | denominators, base rates, significance, guardrail metrics |
-| `council-qa` | operational failure modes (FMEA), pre-mortem, blast radius |
-| `council-redteam` | attacks the premise itself; answers blind |
-| `council-customer` | the real buyer (JTBD); refuses invented quotes and stats; answers blind |
-| `council-gtm` | bottom-up sizing, CAC/LTV, willingness-to-pay, moat |
-| `council-chair` | synthesizes verdicts, surfaces dissent verbatim, applies the readiness gate; does not vote |
+| `council-product` | Validated value and viability (Cagan's four risks), outcome over output |
+| `council-ux` | Nielsen's usability heuristics, error and empty states, accessibility |
+| `council-engineering` | The riskiest technical assumption first, build-versus-buy, scale |
+| `council-data` | Denominators, base rates, significance, and guardrail metrics |
+| `council-qa` | Operational failure modes (FMEA), a pre-mortem, and blast radius |
+| `council-redteam` | Attacks the premise itself. Answers blind |
+| `council-customer` | The real buyer and the job they're hiring you for (JTBD). Refuses invented quotes and stats. Answers blind |
+| `council-gtm` | Bottom-up sizing, cost to acquire against lifetime value (CAC/LTV), willingness to pay, and the moat |
+| `council-chair` | Synthesises, surfaces dissent verbatim, applies the readiness gate. Does not vote |
 
-**The design bet: structured dissent, not a proven better score.** This is a design hypothesis, not an established result. The rationale: ask one model to "consider all angles" and it tends to average itself into a consensus paragraph, so separate seats with distinct mandates surface the disagreement instead of smoothing it over. The honest counter-evidence: correlated LLM judge panels can merely match (or even underperform) the best single judge, because the models make the same mistakes on the same items (see *Nine Judges, Two Effective Votes*, cited in the charter). So the benefit claimed here is **structured dissent and explicit disagreement-surfacing**, not "a panel scores better than one strong review." The council is built for that:
+**How it resists agreeing with itself:**
 
-- **Seats answer independently and blind**: each seat gets the shared neutralized brief as its task input, and the Red-Team and Customer Voice seats never see other verdicts (a skeptic who sees the consensus mirrors it; a customer voice that fills gaps fabricates). One honest caveat: Claude Code subagents still inherit the repo's CLAUDE.md and memory, so seats are not fully isolated from project context. Keep that context neutral if you need true blindness.
-- **Each seat has a distinct mandate and a hard refusal spine**: things it will not pass no matter how the brief is framed. The Customer Voice seat refuses invented quotes and satisfaction stats and labels every unverified claim [hypothesis].
-- **The Chair surfaces dissent verbatim, never averages it away.** Verdicts reach the Chair in randomized order to reduce position bias (randomization mitigates systematic order effects; it can't remove framing, salience, or shared-model correlation), and abstaining seats are excluded from the convergence denominator instead of counted as agreement.
-- **A readiness gate, advisory only.** The gate flags unresolved BLOCKs, high-confidence forks, and silence from a blocking seat (silence gates, never clears). Unanimity is treated as a warning sign, not a pass. You always decide; the council never does.
+- **Seats answer independently and blind.** Each gets the same neutralised brief. Red-Team and
+  Customer never see other verdicts, because a skeptic who reads the consensus mirrors it, and a
+  customer voice filling gaps invents things. **One honest caveat:** Claude Code subagents still
+  inherit the repo's `CLAUDE.md` and memory, so the seats aren't fully isolated from project context.
+  Keep that context neutral if you need real blindness.
+- **Each seat has a refusal spine:** things it won't pass however the brief is framed. Customer Voice
+  labels every unverified claim as a hypothesis.
+- **Verdicts reach the chair in randomised order** to blunt position bias. Randomising helps with
+  order effects; it can't remove framing, salience, or the fact that the models share a brain.
+- **Abstaining seats are excluded from the agreement count** rather than counted as a yes, and a
+  blocking seat that says nothing gates rather than clears.
+- **The gate is advisory.** It flags unresolved blocks, high-confidence forks, and silence. Unanimity
+  is a warning sign, not a pass.
 
-**When to convene it.** Full panel (8 seats + Chair) only for the genuinely high-stakes, multi-path calls. For mid-stakes single deliverables, the charter defines a fast path: Product + Red-Team + the one most-relevant domain seat + Chair. For trivial or one-right-answer questions, skip it entirely, since a full council runs roughly 10-15x the tokens of a single pass, and the charter is explicit that a council firing on everything becomes a tax, not an edge.
+The counter-evidence the charter cites in full: *"Nine Judges, Two Effective Votes: Correlated Errors
+Undermine LLM Evaluation Panels"* (Apple ML Research, 2026, arXiv:2605.29800). A panel of correlated
+judges delivers far fewer effective votes than its headcount, and the best single judge can match or
+beat the whole panel. That's why the eight seats are built to be genuinely different from each other,
+and why nothing here claims a panel scores better than one strong review.
 
-**Invoke it:** after install, say *"convene the council on [decision]"* or load the `council-full` skill. The skill is the runbook; the charter is the governance.
-
-## What makes them useful (vs writing the prompt yourself)
-
-- **Each agent has a strict operating model.** Hard rules, templates, and success metrics baked in, so output is consistent across sessions.
-- **Each agent has its own tool allowlist.** SEO has Bash for crawl audits; ASO doesn't. Reduces accidents.
-- **Each agent has its own model tier.** PM and chief-of-staff use Opus (heavier reasoning); execution agents use Sonnet (faster, cheaper).
-- **They compose.** A typical product launch routes through 5 or 6 of them in sequence (example below).
+</details>
 
 ## Install
+
+You need [Claude Code](https://claude.com/claude-code) itself first. `~/.claude/` is the folder it
+keeps its own settings in.
 
 ```bash
 git clone https://github.com/aksheyw/claude-code-pm-agents.git
 cd claude-code-pm-agents
 
-# Drop the 7 lifecycle agents into your Claude Code config
-cp agents/*.md ~/.claude/agents/
+# The seven lifecycle agents
+mkdir -p ~/.claude/agents
+cp -i agents/*.md ~/.claude/agents/
 
-# Council (optional): the 9 seats, the charter, and the runbook skill
-cp agents/council/council-*.md ~/.claude/agents/
+# The council, if you want it: nine seats, the charter, the runbook
+cp -i agents/council/council-*.md ~/.claude/agents/
 mkdir -p ~/.claude/council ~/.claude/skills/council-full
-cp agents/council/CHARTER.md ~/.claude/council/CHARTER.md
-cp skills/council-full/SKILL.md ~/.claude/skills/council-full/SKILL.md
+cp -i agents/council/CHARTER.md ~/.claude/council/CHARTER.md
+cp -i skills/council-full/SKILL.md ~/.claude/skills/council-full/SKILL.md
 ```
 
-Note the seat files go into `~/.claude/agents/` flat, same as the lifecycle agents (the `agents/council/` subdirectory is just repo organization). The council seats ship without a `model:` pin (they inherit your session model); the charter's "Model assignment" section suggests a tier split if your setup pins models per agent.
+`cp -i` asks before replacing a file you already have. The seat files go into `~/.claude/agents/`
+flat, alongside the others, since `agents/council/` is only how this repo is organised.
 
-After install, in any Claude Code session:
+Then, in any session:
 
 ```
-@product-manager write a PRD for a daily-digest feature
+@product-manager write a spec for a daily-digest feature
 @growth-hacker design 3 activation experiments
-@aso-specialist optimize my Play Store listing
+convene the council on whether to build X
 ```
 
-…or let Claude Code auto-route based on the task description. The `description:` field in each agent's frontmatter tells Claude when to use it.
+Or just describe the task and let Claude Code route it, using the `description:` line in each file.
 
-## Verify install worked
+<details>
+<summary><b>🔍 Check it worked, and what to do if it didn't</b></summary>
 
-In a fresh Claude Code session:
+Start a fresh session, type `@`, and autocomplete should list all seven. The `/agents` view should
+show them under user-level agents, plus the nine `council-*` seats if you installed those. Ask
+*"design 3 activation experiments"* and it should route to `@growth-hacker` on its own.
 
-- Type `@` and autocomplete should list all 7 agents (`@product-manager`, `@growth-hacker`, `@brand-guardian`, `@aso-specialist`, `@seo-specialist`, `@youtube-optimizer`, `@chief-of-staff`).
-- Or open the `/agents` UI, where all 7 should appear under user-level agents.
-- Ask: *"design 3 activation experiments"* → Claude should auto-route to `@growth-hacker` via description matching.
-- If you installed the council: `/agents` should also list the 9 `council-*` seats, and *"convene the council on whether to build X"* should load the `council-full` skill and fan out seats in parallel.
+- **`@<agent>` doesn't autocomplete:** check the files landed flat at `~/.claude/agents/<name>.md`,
+  not in a subdirectory, then restart the session, because agents load at session start.
+- **It routes to the wrong agent:** routing reads the `description:` line in the file. Edit it to
+  mention the kind of task you're giving it.
+- **Wrong model:** check the `model:` line. `product-manager` and `chief-of-staff` are `opus`, the
+  rest `sonnet`. The council seats deliberately ship with no pin, so they inherit your session model;
+  the charter suggests a tier split if you'd rather pin them.
+- **It ran but ignored its templates:** name the template, as in *"use the spec template"*. Some
+  sessions short-circuit the full workflow.
 
-If `@` doesn't show them, see **Troubleshooting** below.
+</details>
 
-## Example output
+<details>
+<summary><b>📄 What comes out: the first lines of a real spec</b></summary>
 
-Abbreviated `@product-manager` output for a daily-digest feature PRD: the first ~15 lines of a longer PRD that ships with problem statement, goals, success metrics, RICE score, GTM brief, and rollout plan.
+Abbreviated `@product-manager` output for a daily-digest feature.
 
 ```
 # PRD: Daily Digest Feature
@@ -127,51 +186,42 @@ Lift D7 engagement from 47% → 55% within 6 weeks of launch.
 - Push frequency tuning per user (defer until baseline data lands)
 ```
 
-The agent enforces RICE scoring, explicit non-goals, and a guardrail metric on every PRD: no fabricated numbers, no hand-wave goals.
+The numbers above are illustrative. What the agent enforces on every spec is the shape: a scored
+priority, explicit non-goals, and a guardrail metric that kills the feature if it's breached. No
+hand-waved goals, and no numbers it made up about your product.
 
-## Troubleshooting
+</details>
 
-- **`@<agent>` doesn't autocomplete:** confirm files landed at `~/.claude/agents/<name>.md` (flat, not in a subdir). Restart your Claude Code session, because agents load at session start.
-- **Auto-routing doesn't pick the right agent:** the routing depends on the `description:` frontmatter in each agent file. If you find a particular task isn't routing, edit that agent's `description:` to mention the task pattern.
-- **Wrong model is being used:** check the `model:` field in the agent's frontmatter. PM and chief-of-staff default to `opus`; rest are `sonnet`. Override per session by passing `--model` to Claude Code.
-- **Agent ran but skipped its templates:** mention the template explicitly (e.g., *"use the PRD template"*), because some sessions short-circuit the agent's full workflow.
+<details>
+<summary><b>📦 A whole launch, agent by agent</b></summary>
 
-## Example: a complete product launch workflow
+A new feature runs through the chain:
 
-A new feature goes through this chain:
-
-1. `@product-manager`: writes the PRD (problem, goals, RICE score, success metrics)
+1. `@product-manager` writes the spec: problem, goals, priority score, success metrics
 2. *Engineering builds it*
-3. `@brand-guardian`: verifies the launch assets stay on-brand
-4. `@aso-specialist` (if mobile) or `@seo-specialist` (if web): optimizes the discoverability surface
-5. `@growth-hacker`: designs the launch playbook + 3-5 post-launch growth experiments
-6. `@youtube-optimizer` (if there's a launch video): packages the announcement video
-7. `@chief-of-staff`: keeps the inbox triaged so you can focus on the launch
+3. `@brand-guardian` checks the launch assets stay on-brand
+4. `@aso-specialist` for mobile, or `@seo-specialist` for web, works on getting it found
+5. `@growth-hacker` designs the launch playbook and the first few experiments after it
+6. `@youtube-optimizer` packages the announcement video, if there is one
+7. `@chief-of-staff` keeps the inbox triaged so you can focus on the launch
 
-Full walkthrough: [examples/pm-workflow.md](examples/pm-workflow.md)
+Full walkthrough in [examples/pm-workflow.md](examples/pm-workflow.md).
 
-## Customizing the agents
+**Editing them:** each agent is one self-contained markdown file with frontmatter (name, description,
+tool allowlist, model), a role section, its non-negotiable rules, its templates, and its workflow.
+The structure is opinionated and the content is meant to be changed. They lean direct and
+metric-first, so if you want a softer tone, edit the rules section.
 
-Each agent file is one self-contained Markdown document with:
-- **Frontmatter**: name, description, tool allowlist, model
-- **Role section**: what the agent does
-- **Critical Rules**: the non-negotiable principles
-- **Templates**: PRD format, RICE table, launch checklist, etc.
-- **Workflow**: phased steps from discovery to measurement
-
-Edit any of these to fit your product's context. The structure is opinionated; the content is meant to be customized.
-
-## Tone / voice
-
-These agents lean direct, opinionated, and metric-first. If your team prefers a softer tone, edit the "Critical Rules" sections.
+</details>
 
 ## Companion repos
 
-These agents are part of my Claude Code config series:
-- [`claude-code-deep-review`](https://github.com/aksheyw/claude-code-deep-review): 14-lens iterative review skill; great companion to the `product-manager` agent for PRD review and the `growth-hacker` agent for launch readiness
-- [`claude-code-rules`](https://github.com/aksheyw/claude-code-rules): opinionated global rules these agents operate under (commit format, branch strategy, honesty/earned-confidence)
-- [`claude-code-learned-skills`](https://github.com/aksheyw/claude-code-learned-skills): 12 skills auto-extracted from real debugging and research sessions (Docker/SSH/VPS, ML pipelines, prompting, quality tooling, a project wiki)
-- [`career-command-center-template`](https://github.com/aksheyw/career-command-center-template): full plugin template for an AI-native job-search workflow (12 skills, 8 personal-data skeletons, hooks)
+Part of my Claude Code config series:
+
+- [`claude-code-deep-review`](https://github.com/aksheyw/claude-code-deep-review): a 14-lens iterative review skill, a good companion to `product-manager` for spec review
+- [`claude-code-rules`](https://github.com/aksheyw/claude-code-rules): the 13 global rules these agents operate under
+- [`claude-code-learned-skills`](https://github.com/aksheyw/claude-code-learned-skills): 12 skills taken from real debugging and research sessions, covering Docker, SSH and VPS work, ML pipelines, prompting guides and a project wiki
+- [`career-command-center-template`](https://github.com/aksheyw/career-command-center-template): a full plugin template for running a job search with Claude Code, with 12 skills, 8 personal-data files you fill in yourself, and hooks
 
 ## License
 
@@ -179,4 +229,5 @@ MIT. See [LICENSE](LICENSE).
 
 ---
 
-Built by [Akshey Walia](https://github.com/aksheyw). If you build interesting workflows on top of these or extend them with new agents, send a PR.
+Built by [Akshey Walia](https://github.com/aksheyw). If you build something on top of these, or add an
+agent, send a pull request.

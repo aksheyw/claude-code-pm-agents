@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 344" width="960" height="344" role="img" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="344" fill="#FFFFFF"/>
+
+  <text x="40" y="34" font-size="15" font-weight="600" fill="#5B6169">Why nine seats instead of one "review this"</text>
+
+  <!-- brief -->
+  <rect x="40" y="56" width="150" height="86" rx="10" fill="#F3F5F9" stroke="#B9BEC6" stroke-width="1.5"/>
+  <text x="56" y="80" font-size="12" font-weight="700" fill="#1B2A4A">THE DECISION</text>
+  <text x="56" y="104" font-size="13.5" fill="#1B2A4A">One neutral brief,</text>
+  <text x="56" y="122" font-size="13.5" fill="#1B2A4A">worded to lead nobody.</text>
+
+  <path d="M198 99 L232 99" stroke="#B9BEC6" stroke-width="2" fill="none"/>
+  <path d="M232 99 l-8 -5 v10 z" fill="#B9BEC6"/>
+
+  <!-- seats -->
+  <rect x="240" y="46" width="316" height="106" rx="10" fill="#F5F6F7" stroke="#B9BEC6" stroke-width="1.5"/>
+  <text x="256" y="68" font-size="12" font-weight="700" fill="#1B2A4A">8 SEATS ANSWER IN PARALLEL</text>
+  <text x="256" y="90" font-size="13" fill="#5B6169">product · ux · engineering · data</text>
+  <text x="256" y="108" font-size="13" fill="#5B6169">qa · gtm</text>
+  <rect x="256" y="112" width="284" height="34" rx="6" fill="#FDF6F5" stroke="#E8D5D2" stroke-width="1"/>
+  <text x="268" y="127" font-size="12" font-weight="600" fill="#B42318">red-team + customer answer BLIND,</text>
+  <text x="268" y="141" font-size="12" font-weight="600" fill="#B42318">seeing no other seat's verdict</text>
+
+  <path d="M564 99 L598 99" stroke="#0E9384" stroke-width="2" fill="none"/>
+  <path d="M598 99 l-8 -5 v10 z" fill="#0E9384"/>
+
+  <!-- chair -->
+  <rect x="606" y="46" width="314" height="106" rx="10" fill="#E6F4F1" stroke="#0E9384" stroke-width="1.5"/>
+  <text x="622" y="68" font-size="12" font-weight="700" fill="#0B6E5F">THE CHAIR, WHO DOES NOT VOTE</text>
+  <text x="622" y="90" font-size="13.5" fill="#0B6E5F">Reads them in random order, prints</text>
+  <text x="622" y="108" font-size="13.5" fill="#0B6E5F">disagreement word for word, and</text>
+  <text x="622" y="126" font-size="13.5" fill="#0B6E5F">never averages it into a verdict.</text>
+
+  <!-- gate -->
+  <rect x="240" y="170" width="680" height="40" rx="8" fill="#F3F5F9" stroke="#B9BEC6" stroke-width="1"/>
+  <text x="256" y="195" font-size="13.5" fill="#1B2A4A">A silent seat blocks and never clears. Everyone agreeing is treated as a warning, not a pass. You decide, always.</text>
+
+  <line x1="40" y1="240" x2="920" y2="240" stroke="#E3E6EB" stroke-width="1"/>
+
+  <!-- honesty strip -->
+  <rect x="40" y="258" width="880" height="66" rx="8" fill="#FDF6F5" stroke="#E8D5D2" stroke-width="1"/>
+  <text x="56" y="280" font-size="12" font-weight="700" fill="#B42318">THE ONE TIME I MEASURED IT</text>
+  <text x="56" y="302" font-size="13.5" fill="#5C4A47">Six agents, four of them from this bundle, reviewed a release build of my Android app. All six approved</text>
+  <text x="56" y="318" font-size="13.5" fill="#5C4A47">with conditions, averaging 77 out of 100. Then I found a critical bug all six had missed.</text>
+</svg>
