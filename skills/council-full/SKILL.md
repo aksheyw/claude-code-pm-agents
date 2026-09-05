@@ -1,6 +1,6 @@
 ---
 name: council-full
-description: Convene the full 9-seat product council (Product, UX, Engineering, Data, QA, Red-Team, Customer Voice, Business/GTM, + a Chair) for high-stakes decisions: case studies, 0-1 bets, positioning, monetization, go/no-go. Seats answer independently and blind, a Chair synthesizes and applies a readiness gate, the user decides. Use for big multi-path calls; for a quick ambiguous call a single second-opinion pass is enough.
+description: Convene the full 9-seat product council (Product, UX, Engineering, Data, QA, Red-Team, Customer Voice, Business/GTM, + a Chair) for high-stakes decisions: case studies, 0-1 bets, positioning, monetization, go/no-go. Voting seats answer independently and blind, a Chair synthesizes and applies a readiness gate, the user decides. Use for big multi-path calls; for a quick ambiguous call a single second-opinion pass is enough.
 ---
 
 # council-full: convene the 9-seat product council
@@ -8,7 +8,7 @@ description: Convene the full 9-seat product council (Product, UX, Engineering, 
 Full governance, roster, model guidance, and rationale: **`~/.claude/council/CHARTER.md`** (installed from `agents/council/CHARTER.md` in this repo). Read it if you have not. This skill is the runbook.
 
 ## What this is
-A discipline panel that pressure-tests a high-stakes decision and returns ONE honest CEO brief. Advisory only: the user decides. The edge comes from seats answering independently and blind, then a Chair surfacing the disagreement instead of averaging it away.
+A discipline panel that pressure-tests a high-stakes decision and returns ONE honest CEO brief. Advisory only: the user decides. The edge comes from the voting seats answering independently and blind, then a Chair surfacing the disagreement instead of averaging it away.
 
 ## Vocabulary (used by every seat and the gate)
 - **Verdict families:** APPROVE, APPROVE-WITH-CONDITIONS, REVISE, BLOCK. Each seat opens its answer with `VERDICT: <one of these> | CONFIDENCE: <0-100>`.
@@ -44,8 +44,8 @@ GATED if: an unresolved refusal/safety flag; an unresolved high-conviction BLOCK
 ### 6. Hand the user the brief
 Present the CEO brief. The user decides. If the project has a docs folder, offer to save it to `docs/council-reviews/<date>-<slug>.md`; otherwise present inline.
 
-## Cost discipline
-A full council is ~10-15x a single pass. Size the panel to the stakes (use the fast path for mid-stakes). Fan out concurrently so each wave's wall-clock is its slowest seat; budget for up to three serial waves (fan-out, optional second round, synthesis). Calibration stays OFF unless this is a long-lived project (CHARTER).
+## Panel sizing and latency
+Size the panel to the stakes (use the fast path for mid-stakes). Fan out concurrently so each wave's wall-clock is its slowest seat; budget for up to three serial waves (fan-out, optional second round, synthesis). Calibration stays OFF unless this is a long-lived project (CHARTER).
 
 ## Anti-patterns
 - Letting seats see each other's answers (kills the whole point).

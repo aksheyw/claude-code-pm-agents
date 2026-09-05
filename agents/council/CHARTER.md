@@ -59,7 +59,7 @@ The Chair is the 9th seat but does not cast a verdict; the council has **8 votin
 
 ## Anti-anchoring (the spine)
 
-- Seats answer **independently and blind**. Red-Team and Customer Voice are strictly blind: a skeptic who sees the consensus mirrors it; a customer voice that fills gaps fabricates.
+- Voting seats answer **independently and blind**. Red-Team and Customer Voice are strictly blind: a skeptic who sees the consensus mirrors it; a customer voice that fills gaps fabricates.
 - Give every seat the **same neutralized brief** so independence varies judgment, not facts.
 - **Decorrelate the seats (the #1 lever).** A panel of correlated voting seats yields far fewer effective votes than its headcount. Primary decorrelation is the sharply distinct mandate + refusal spine each seat carries, plus the blind-independent protocol.
 - **Correlation response:** if verdicts come back suspiciously unanimous or tightly clustered, the Chair states the correlation risk in the brief AND the orchestrator re-runs the single most-pivotal seat on a sharpened or deliberately neutralized brief (or applies a stated discount to the consensus), rather than only narrating the suspicion.
@@ -108,11 +108,11 @@ OFF for one-shot work (auditions, case studies): at small N a council "score" is
 
 ## Witnesses (on-call, read-only)
 
-The framing step pre-selects any obvious witness; a seat or the Chair may request one mid-review. A witness is dispatched to gather depth a seat lacks and returns **evidence and analysis, not a voting verdict** — its answer is handed to the requesting seat or the Chair to inform their judgment, and it is never counted in the X/N convergence. **Prefer a witness whose tool grants are actually read-only** (Read/Grep/Glob, plus WebSearch/WebFetch only if it genuinely needs them). A prompt that says a witness "must not Write/Edit/Bash" is a convention, not an enforced sandbox: an arbitrary installed specialist may still carry mutation tools, so pick one whose frontmatter `tools:` list genuinely withholds them rather than trusting the instruction. Suitable read-only witnesses are review-only specialists whose `tools:` are limited to Read/Grep/Glob (plus WebSearch/WebFetch when needed) — e.g. an architecture, security, database, or performance reviewer. (Note: the general-purpose builder agents bundled in this repo, like `growth-hacker` and `seo-specialist`, carry Write/Edit/Bash and are therefore NOT read-only witnesses — check the `tools:` line before dispatching any agent as a witness.) **Legal / compliance / regulatory risk has no standing seat by design** (the roster is fixed at 9); summon a witness for it when a decision turns on it.
+The framing step pre-selects any obvious witness; a seat or the Chair may request one mid-review. A witness is dispatched to gather depth a seat lacks and returns **evidence and analysis, not a voting verdict** — its answer is handed to the requesting seat or the Chair to inform their judgment, and it is never counted in the X/N convergence. **Prefer a witness whose tool grants are actually read-only** (Read/Grep/Glob, plus WebSearch/WebFetch only if it genuinely needs them). A prompt that says a witness "must not Write/Edit/Bash" is a convention, not an enforced sandbox: an arbitrary installed specialist may still carry mutation tools, so pick one whose frontmatter `tools:` list genuinely withholds them rather than trusting the instruction. Suitable read-only witnesses are review-only specialists whose `tools:` are limited to Read/Grep/Glob (plus WebSearch/WebFetch when needed) — e.g. an architecture, security, database, or performance reviewer. (Note: the general-purpose builder agents bundled in this repo, like `growth-hacker` and `seo-specialist`, carry Write and Edit, and `seo-specialist` also carries Bash, so they are NOT read-only witnesses — check the `tools:` line before dispatching any agent as a witness.) **Legal / compliance / regulatory risk has no standing seat by design** (the roster is fixed at 9); summon a witness for it when a decision turns on it.
 
-## Time and cost discipline
+## Panel sizing and latency
 
-A full council is roughly 10-15x the tokens of a single pass. Size the panel to the stakes; use the fast path for mid-stakes. Fan out concurrently: each WAVE's wall-clock is its slowest seat, but the protocol has up to three serial waves (fan-out, optional second round, synthesis), so budget for that, not a single seat's latency.
+Size the panel to the stakes; use the fast path for mid-stakes. Fan out concurrently: each WAVE's wall-clock is its slowest seat, but the protocol has up to three serial waves (fan-out, optional second round, synthesis), so budget for that, not a single seat's latency.
 
 ---
 

@@ -32,9 +32,7 @@ ships alongside them, in `agents/council/CHARTER.md`, and it's what sets the rul
 
 **The honest counter-argument, which the charter cites in full:** a panel whose members make the same
 mistakes on the same questions isn't nine opinions, it's closer to two, and a single strong reviewer
-can match it. Nothing here is enforced by code either. These are instructions to a model, not
-permissions a runtime checks, and the seats share a model, so "independent" is a design intent rather
-than a guarantee.
+can match it. The seats share a model, so "independent" is a design intent rather than a guarantee.
 
 So what this buys is structured dissent, not a better score, and the one time I measured it is on the
 picture above: six agents reviewed a release build of my Android app, four of them from this bundle
@@ -42,9 +40,8 @@ and two others I keep globally. All six approved with conditions. Then I found a
 had missed. That's an n of one and it went against the design, which is exactly why the gate only
 advises and you decide.
 
-A full council also runs roughly 10 to 15 times the tokens of a single pass, so it's for the calls
-where being wrong is expensive. The charter defines a faster path of three seats plus the chair, and
-for a question with one right answer you skip it entirely.
+A full council is for the calls where being wrong is expensive. The charter defines a faster path of
+three seats plus the chair, and for a question with one right answer you skip it entirely.
 
 <details>
 <summary><b>📋 The seven agents that do the work</b></summary>
@@ -158,9 +155,9 @@ show them under user-level agents, plus the nine `council-*` seats if you instal
 </details>
 
 <details>
-<summary><b>📄 What comes out: the first lines of a real spec</b></summary>
+<summary><b>📄 What comes out: the first lines of an illustrative spec</b></summary>
 
-Abbreviated `@product-manager` output for a daily-digest feature.
+An example of `@product-manager` output for a daily-digest feature.
 
 ```
 # PRD: Daily Digest Feature
