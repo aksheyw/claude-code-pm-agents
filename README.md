@@ -18,7 +18,7 @@ Seven of these do product work, one mode each, so I stop context-switching betwe
 are a council that pressure-tests a decision before I commit to it.
 
 <img src="docs/how-the-council-works.svg" width="100%"
-     alt="Why nine seats instead of one 'review this'. One neutral brief, worded to lead nobody, goes to eight seats that answer in parallel: product, ux, engineering, data, qa and gtm, while the red-team and customer seats answer blind, seeing no one else's reply. A chair, which does not vote, reads them in random order, prints disagreement word for word, and never averages it into a verdict. A silent seat blocks and never clears, everyone agreeing is treated as a warning rather than a pass, and you decide, always. The one time I measured it: six agents, four of them from this bundle, reviewed a release build of my Android app, all six approved with conditions averaging 77 out of 100, and then I found a critical bug all six had missed, which is why the gate only advises. The seven agents that do the work rather than judge it are listed further down the page.">
+     alt="Why nine seats instead of one 'review this'. One neutral brief, worded to lead nobody, goes to eight seats that answer in parallel: product, ux, engineering, data, qa and gtm, while the red-team and customer seats answer blind, seeing no one else's reply. A chair, which does not vote, reads them in random order, prints disagreement word for word, and never averages it into a verdict. Everyone agreeing is treated as a warning rather than a pass, and you decide, always. The one time I measured it: six agents, four of them from this bundle, reviewed a release build of my Android app, all six approved with conditions averaging 77 out of 100, and then I found a critical bug all six had missed, which is why the gate only advises. The seven agents that do the work rather than judge it are listed further down the page.">
 
 ## Why a panel and not one "review this"
 
@@ -43,7 +43,7 @@ had missed. That's an n of one and it went against the design, which is exactly 
 advises and you decide.
 
 A full council also runs roughly 10 to 15 times the tokens of a single pass, so it's for the calls
-where being wrong is expensive. For everything else the charter defines a faster three-seat path, and
+where being wrong is expensive. The charter defines a faster path of three seats plus the chair, and
 for a question with one right answer you skip it entirely.
 
 <details>
@@ -60,7 +60,7 @@ job gets a heavier model and the app-store agent can't accidentally run a shell 
 | `aso-specialist` | sonnet | App store optimisation (ASO): getting found in the Play Store and Chrome Web Store | Before any app store submission |
 | `seo-specialist` | sonnet | Technical search optimisation (SEO), topic clusters, and being quotable by AI search engines (AEO) | Any content site or product web app |
 | `youtube-optimizer` | sonnet | YouTube titles, thumbnails, retention, channel strategy | Any video workflow |
-| `chief-of-staff` | opus | Triage across email, Slack, LINE and Messenger, plus draft replies | Daily inbox triage |
+| `chief-of-staff` | opus | Triage across email, Slack, LINE and Messenger, plus draft replies. Needs a Gmail command-line tool, Node.js, its own knowledge files, a calendar script and a Claude Code hook, none of which ship in this repo. | Daily inbox triage |
 
 </details>
 
@@ -83,7 +83,7 @@ Eight voting discipline seats plus a chair who doesn't vote.
 
 **How it resists agreeing with itself:**
 
-- **Seats answer independently and blind.** Each gets the same neutralised brief. Red-Team and
+- **Voting seats answer independently and blind.** Each gets the same neutralised brief. Red-Team and
   Customer never see other verdicts, because a skeptic who reads the consensus mirrors it, and a
   customer voice filling gaps invents things. **One honest caveat:** Claude Code subagents still
   inherit the repo's `CLAUDE.md` and memory, so the seats aren't fully isolated from project context.
@@ -186,9 +186,9 @@ Lift D7 engagement from 47% → 55% within 6 weeks of launch.
 - Push frequency tuning per user (defer until baseline data lands)
 ```
 
-The numbers above are illustrative. What the agent enforces on every spec is the shape: a scored
-priority, explicit non-goals, and a guardrail metric that kills the feature if it's breached. No
-hand-waved goals, and no numbers it made up about your product.
+The numbers above are illustrative. What the agent enforces on every spec is the shape:
+explicit non-goals and a guardrail metric that kills the feature if it's breached. No
+hand-waved goals.
 
 </details>
 
@@ -197,7 +197,7 @@ hand-waved goals, and no numbers it made up about your product.
 
 A new feature runs through the chain:
 
-1. `@product-manager` writes the spec: problem, goals, priority score, success metrics
+1. `@product-manager` writes the spec: problem, goals, success metrics
 2. *Engineering builds it*
 3. `@brand-guardian` checks the launch assets stay on-brand
 4. `@aso-specialist` for mobile, or `@seo-specialist` for web, works on getting it found
@@ -207,7 +207,7 @@ A new feature runs through the chain:
 
 Full walkthrough in [examples/pm-workflow.md](examples/pm-workflow.md).
 
-**Editing them:** each agent is one self-contained markdown file with frontmatter (name, description,
+**Editing them:** each agent is one markdown file with frontmatter (name, description,
 tool allowlist, model), a role section, its non-negotiable rules, its templates, and its workflow.
 The structure is opinionated and the content is meant to be changed. They lean direct and
 metric-first, so if you want a softer tone, edit the rules section.

@@ -33,7 +33,7 @@
 
   <!-- gate -->
   <rect x="240" y="170" width="680" height="40" rx="8" fill="#F3F5F9" stroke="#B9BEC6" stroke-width="1"/>
-  <text x="256" y="195" font-size="13.5" fill="#1B2A4A">A silent seat blocks and never clears. Everyone agreeing is treated as a warning, not a pass. You decide, always.</text>
+  <text x="256" y="195" font-size="13.5" fill="#1B2A4A">Everyone agreeing is treated as a warning, not a pass. You decide, always.</text>
 
   <line x1="40" y1="240" x2="920" y2="240" stroke="#E3E6EB" stroke-width="1"/>
 
