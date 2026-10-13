@@ -1,6 +1,6 @@
 # A Complete Product Launch with the 7 PM Agents
 
-This walkthrough shows how the 7 agents compose into a single end-to-end launch workflow. Real example, lightly anonymized.
+This walkthrough shows how the 7 agents compose into a single end-to-end launch workflow. The scenario and its metrics are illustrative.
 
 ---
 

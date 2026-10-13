@@ -183,7 +183,7 @@ Lift D7 engagement from 47% → 55% within 6 weeks of launch.
 - Push frequency tuning per user (defer until baseline data lands)
 ```
 
-The numbers above are illustrative. What the agent enforces on every spec is the shape:
+The numbers above are illustrative. What the agent asks for on every spec is the shape:
 explicit non-goals and a guardrail metric that kills the feature if it's breached. No
 hand-waved goals.
 
