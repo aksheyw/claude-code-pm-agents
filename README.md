@@ -18,7 +18,7 @@ Seven of these do product work, one mode each, so I stop context-switching betwe
 are a council that pressure-tests a decision before I commit to it.
 
 <img src="docs/how-the-council-works.svg" width="100%"
-     alt="Why nine seats instead of one 'review this'. One neutral brief, worded to lead nobody, goes to eight seats that answer in parallel: product, ux, engineering, data, qa and gtm, while the red-team and customer seats answer blind, seeing no one else's reply. A chair, which does not vote, reads them in random order, prints disagreement word for word, and never averages it into a verdict. Everyone agreeing is treated as a warning rather than a pass, and you decide, always. The one time I measured it: six agents, four of them from this bundle, reviewed a release build of my Android app, all six approved with conditions averaging 77 out of 100, and then I found a critical bug all six had missed, which is why the gate only advises. The seven agents that do the work rather than judge it are listed further down the page.">
+     alt="Why nine seats instead of one 'review this'. One neutral brief, worded to lead nobody, goes to eight seats that answer in parallel: product, ux, engineering, data, qa and gtm, while the red-team and customer seats answer blind, seeing no one else's reply. A chair, which does not vote, reads them in random order, prints disagreement word for word, and never averages it into a verdict. Everyone agreeing is treated as a warning rather than a pass, and you decide, always. One time I measured it: six agents, four of them from this bundle, reviewed a release build of my Android app, all six approved with conditions averaging 77 out of 100, and then I found a critical bug all six had missed, which is why the gate only advises. The seven agents that do the work rather than judge it are listed further down the page.">
 
 ## Why a panel and not one "review this"
 
@@ -34,11 +34,12 @@ ships alongside them, in `agents/council/CHARTER.md`, and it's what sets the rul
 mistakes on the same questions isn't nine opinions, it's closer to two, and a single strong reviewer
 can match it. The seats share a model, so "independent" is a design intent rather than a guarantee.
 
-So what this buys is structured dissent, not a better score, and the one time I measured it is on the
-picture above: six agents reviewed a release build of my Android app, four of them from this bundle
-and two others I keep globally. All six approved with conditions. Then I found a critical bug all six
-had missed. That's an n of one and it went against the design, which is exactly why the gate only
-advises and you decide.
+So what this buys is structured dissent, not a better score. The picture above shows one time I
+measured it: six agents reviewed a release build of my Android app, four of them from this bundle and
+two others I keep globally. All six approved with conditions. Then I found a critical bug all six had
+missed. Later I gave the council 10 past decisions from my own projects whose outcomes I now know. Its
+go or no-go call was no more accurate than one plain prompt, at about 18 times the cost. The missed
+bug is why the gate only advises and you decide. The score is why I call it dissent, not accuracy.
 
 A full council is for the calls where being wrong is expensive. The charter defines a faster path of
 three seats plus the chair, and for a question with one right answer you skip it entirely.
@@ -216,7 +217,7 @@ metric-first, so if you want a softer tone, edit the rules section.
 Part of my Claude Code config series:
 
 - [`claude-code-deep-review`](https://github.com/aksheyw/claude-code-deep-review): a 14-lens iterative review skill, a good companion to `product-manager` for spec review
-- [`claude-code-rules`](https://github.com/aksheyw/claude-code-rules): the 13 global rules these agents operate under
+- [`claude-code-rules`](https://github.com/aksheyw/claude-code-rules): the global rules these agents operate under
 - [`claude-code-learned-skills`](https://github.com/aksheyw/claude-code-learned-skills): 12 skills taken from real debugging and research sessions, covering Docker, SSH and VPS work, ML pipelines, prompting guides and a project wiki
 - [`career-command-center-template`](https://github.com/aksheyw/career-command-center-template): a full plugin template for running a job search with Claude Code, with 12 skills, 8 personal-data files you fill in yourself, and hooks
 
