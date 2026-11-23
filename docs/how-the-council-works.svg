@@ -39,7 +39,7 @@
 
   <!-- honesty strip -->
   <rect x="40" y="258" width="880" height="66" rx="8" fill="#FDF6F5" stroke="#E8D5D2" stroke-width="1"/>
-  <text x="56" y="280" font-size="12" font-weight="700" fill="#B42318">THE ONE TIME I MEASURED IT</text>
+  <text x="56" y="280" font-size="12" font-weight="700" fill="#B42318">ONE TIME I MEASURED IT</text>
   <text x="56" y="302" font-size="13.5" fill="#5C4A47">Six agents, four of them from this bundle, reviewed a release build of my Android app. All six approved</text>
   <text x="56" y="318" font-size="13.5" fill="#5C4A47">with conditions, averaging 77 out of 100. Then I found a critical bug all six had missed.</text>
 </svg>
